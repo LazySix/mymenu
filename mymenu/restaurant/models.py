@@ -40,6 +40,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey('ProductCategory')
+    short_description = models.CharField(max_length=1023, null=True, blank=True)
+    full_description = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return self.name
