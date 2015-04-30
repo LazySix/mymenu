@@ -2,30 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-
-class Place(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
-    info = models.TextField(null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = u'Place'
-        verbose_name_plural = verbose_name
-
-class Table(models.Model):
-    place = models.ForeignKey('Place')
-    code = models.CharField(max_length=255, null=True, blank=True)
-    isFree = models.BooleanField(default=True)
-
-    def __unicode__(self):
-        return self.code
-
-    class Meta:
-        verbose_name = u'Table'
-        verbose_name_plural = verbose_name
-
 class ProductCategory(models.Model):
     name = models.CharField(max_length=255)
 
@@ -51,14 +27,40 @@ class Product(models.Model):
         verbose_name_plural = verbose_name
 
 class Menu(models.Model):
+    name = models.CharField(max_length=510)
     products = models.ManyToManyField('Product')
 
     def __unicode__(self):
-        return u'Menu'
+        return self.name
 
     class Meta:
         verbose_name = u'Menu'
         verbose_name_plural = verbose_name
+
+
+class Place(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True)
+    info = models.TextField(null=True, blank=True)
+    menu = models.ForeignKey('Menu')
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'Place'
+        verbose_name_plural = verbose_name
+
+class Table(models.Model):
+    place = models.ForeignKey('Place')
+    code = models.CharField(max_length=255, null=True, blank=True)
+    isFree = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = u'Table'
+        verbose_name_plural = verbose_name
+
 
 class Order(models.Model):
     table = models.ForeignKey('Table')
