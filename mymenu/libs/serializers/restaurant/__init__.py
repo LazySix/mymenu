@@ -38,11 +38,19 @@ class TableSerializer(serializers.ModelSerializer):
         model = Table
         fields = ('id', 'place', 'code', 'isFree')
 
+
+class ProductQuantitySerializer(serializers.ModelSerializer):
+    product = ProductSerializer(many=False)
+
+    class Meta:
+        model = ProductQuantity
+        fields = ('id', 'product', 'quantity')
+
 class OrderSerializer(serializers.ModelSerializer):
 
     table = TableSerializer(many=False)
-    products = ProductSerializer(many=True)
+    products_quantity = ProductQuantitySerializer(many=True)
 
     class Meta:
         model = Order
-        fields = ('id', 'table', 'products', 'total')
+        fields = ('id', 'table', 'products_quantity', 'isFinished', 'total')

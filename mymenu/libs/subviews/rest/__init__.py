@@ -51,6 +51,13 @@ class TableList(APIView):
         serializer = TableSerializer(obj, many=True)
         return JSONResponse(serializer.data)
 
+class ProductQuantityList(APIView):
+    @csrf_exempt
+    def get(self, request):
+        obj = ProductQuantity.objects.all()
+        serializer = ProductQuantitySerializer(obj, many=True)
+        return JSONResponse(serializer.data)
+
 class OrderList(APIView):
     @csrf_exempt
     def get(self, request):
@@ -110,6 +117,16 @@ class TableDetail(APIView):
         except:
             return HttpResponse(status=404)
         serializer = TableSerializer(obj)
+        return JSONResponse(serializer.data)
+
+class ProductQuantityDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = ProductQuantity.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = ProductQuantitySerializer(obj)
         return JSONResponse(serializer.data)
 
 class OrderDetail(APIView):
