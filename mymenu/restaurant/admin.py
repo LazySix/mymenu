@@ -1,25 +1,33 @@
 from django.contrib import admin
 from .models import *
-# Register your models here.
 
 
 class PlaceAdmin(admin.ModelAdmin):
     pass
 
+
 class TableAdmin(admin.ModelAdmin):
     pass
+
 
 class ProductCategoryAdmin(admin.ModelAdmin):
     pass
 
+
 class ProductAdmin(admin.ModelAdmin):
     pass
+
 
 class MenuAdmin(admin.ModelAdmin):
     pass
 
+
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    def save_model(self, request, obj, form, change):
+        obj.total = sum(pr.price for pr in form.cleaned_data['products'])
+        obj.save()
+
+
 
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Table, TableAdmin)

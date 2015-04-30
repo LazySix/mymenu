@@ -13,6 +13,8 @@ class JSONResponse(HttpResponse):
         super(JSONResponse, self).__init__(content, **kwargs)
 
 
+
+#################### LIST REST VIEWS ############################
 class ProductCategoryList(APIView):
     @csrf_exempt
     def get(self, request):
@@ -54,4 +56,68 @@ class OrderList(APIView):
     def get(self, request):
         obj = Order.objects.all()
         serializer = OrderSerializer(obj, many=True)
+        return JSONResponse(serializer.data)
+
+
+#################### DETAIL REST VIEWS ############################
+
+class ProductCategoryDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = ProductCategory.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = ProductCategorySerializer(obj)
+        return JSONResponse(serializer.data)
+
+
+class ProductDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Product.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = ProductSerializer(obj)
+        return JSONResponse(serializer.data)
+
+class MenuDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Menu.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = MenuSerializer(obj)
+        return JSONResponse(serializer.data)
+
+class PlaceDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Place.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = PlaceSerializer(obj)
+        return JSONResponse(serializer.data)
+
+class TableDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Table.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = TableSerializer(obj)
+        return JSONResponse(serializer.data)
+
+class OrderDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Order.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = OrderSerializer(obj)
         return JSONResponse(serializer.data)

@@ -1,6 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
 
-# Create your models here.
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -11,6 +12,7 @@ class ProductCategory(models.Model):
     class Meta:
         verbose_name = u'Product Category'
         verbose_name_plural = verbose_name
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
@@ -25,6 +27,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = u'Product'
         verbose_name_plural = verbose_name
+
 
 class Menu(models.Model):
     name = models.CharField(max_length=510)
@@ -42,12 +45,14 @@ class Place(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     info = models.TextField(null=True, blank=True)
     menu = models.ForeignKey('Menu')
+
     def __unicode__(self):
         return self.name
 
     class Meta:
         verbose_name = u'Place'
         verbose_name_plural = verbose_name
+
 
 class Table(models.Model):
     place = models.ForeignKey('Place')
@@ -65,7 +70,8 @@ class Table(models.Model):
 class Order(models.Model):
     table = models.ForeignKey('Table')
     products = models.ManyToManyField('Product')
-    total = models.DecimalField(max_digits=10, decimal_places=2)
+    isFinished = models.BooleanField(default=False)
+    total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     def __unicode__(self):
         return u'Order for table: %s' % self.table.code
