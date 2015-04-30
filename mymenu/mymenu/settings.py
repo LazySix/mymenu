@@ -90,6 +90,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'mymenu/static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mymenu/media')
+
 
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP

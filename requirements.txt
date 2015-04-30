@@ -4,4 +4,5 @@ South==0.8.4
 argparse==1.2.1
 django-suit==0.2.13
 djangorestframework==2.3.12
+gunicorn==19.3.0
 wsgiref==0.1.2
