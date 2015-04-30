@@ -26,6 +26,9 @@ class ProductQuantityAdmin(admin.ModelAdmin):
     pass
 
 
+class BillAdmin(admin.ModelAdmin):
+    pass
+
 class OrderAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.total = sum(pr_q.product.price * pr_q.quantity for pr_q in form.cleaned_data['products_quantity'])
@@ -39,3 +42,4 @@ admin.site.register(ProductCategory, ProductCategoryAdmin)
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(ProductQuantity, ProductQuantityAdmin)
+admin.site.register(Bill, BillAdmin)

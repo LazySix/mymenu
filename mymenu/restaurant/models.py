@@ -89,3 +89,15 @@ class Order(models.Model):
     class Meta:
         verbose_name = u'Order'
         verbose_name_plural = verbose_name
+
+
+class Bill(models.Model):
+    isPaid = models.BooleanField(default=False)
+    table = models.ForeignKey('Table')
+
+    def __unicode__(self):
+        return u'Bill %d for table: %s' %(self.pk, self.table.code)
+
+    class Meta:
+        verbose_name = u'Bill'
+        verbose_name_plural = verbose_name
