@@ -66,10 +66,20 @@ class Table(models.Model):
         verbose_name = u'Table'
         verbose_name_plural = verbose_name
 
+class ProductQuantity(models.Model):
+    product = models.ForeignKey('Product')
+    quantity = models.IntegerField(default=1)
+
+    def __unicode__(self):
+        return u'%d x %s' %(self.quantity, self.product.name)
+
+    class Meta:
+        verbose_name = u'Product Quantity'
+        verbose_name_plural = verbose_name
 
 class Order(models.Model):
     table = models.ForeignKey('Table')
-    products = models.ManyToManyField('Product')
+    products_quantity = models.ManyToManyField('ProductQuantity', verbose_name=u'Products')
     isFinished = models.BooleanField(default=False)
     total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
