@@ -45,6 +45,7 @@ class PlaceList(APIView):
         return JSONResponse(serializer.data)
 
 class TableList(APIView):
+
     @csrf_exempt
     def get(self, request):
         obj = Table.objects.all()

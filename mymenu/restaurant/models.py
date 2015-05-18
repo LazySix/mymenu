@@ -7,7 +7,7 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
     class Meta:
         verbose_name = u'Product Category'
@@ -22,7 +22,7 @@ class Product(models.Model):
     full_description = models.TextField(null=True, blank=True)
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
     class Meta:
         verbose_name = u'Product'
@@ -34,7 +34,7 @@ class Menu(models.Model):
     products = models.ManyToManyField('Product')
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
     class Meta:
         verbose_name = u'Menu'
@@ -47,7 +47,7 @@ class Place(models.Model):
     menu = models.ForeignKey('Menu')
 
     def __unicode__(self):
-        return self.name
+        return u'%s' % self.name
 
     class Meta:
         verbose_name = u'Place'
@@ -60,7 +60,7 @@ class Table(models.Model):
     isFree = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return self.code
+        return u'%s' % self.code
 
     class Meta:
         verbose_name = u'Table'
