@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'corsheaders',
     # 'rest_framework.authtoken',
     'south',
-    'restaurant'
+    'restaurant',
+    'rest_framework.authtoken'
 
 )
 
@@ -108,13 +109,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'restaurant/templates'),
 )
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-    )
-}
 
 SUIT_CONFIG = {
     # header

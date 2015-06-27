@@ -3,6 +3,8 @@ import json
 import traceback
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from libs.serializers.restaurant import *
@@ -145,6 +147,10 @@ class OrderDetail(APIView):
 
 
 class PostRequests(APIView):
+
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
     @csrf_exempt
     def post(self, request, pk, format=None):
         try:
