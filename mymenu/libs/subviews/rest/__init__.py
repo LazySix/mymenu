@@ -176,6 +176,8 @@ class TableDetail(APIView):
                     table.save()
                     return JSONResponse(True)
 
+            return JSONResponse({"status": "Unknown action"})
+
         except Exception as e:
             print traceback.print_exc()
             return JSONResponse({'error': True, 'reason': 'Server error'})
