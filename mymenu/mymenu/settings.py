@@ -110,6 +110,12 @@ TEMPLATE_DIRS = (
 )
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
+
 SUIT_CONFIG = {
     # header
     'ADMIN_NAME': 'LazySix',
