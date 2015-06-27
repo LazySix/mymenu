@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^api/rest/table/(?P<pk>[0-9]+)/$', TableDetail.as_view(), name="Table"),
     url(r'^api/rest/quantity/(?P<pk>[0-9]+)/$', ProductQuantityDetail.as_view(), name="Product Quantity"),
     url(r'^api/rest/order/(?P<pk>[0-9]+)/$', OrderDetail.as_view(), name="Order"),
+    url(r'^api/rest/post/(?P<pk>[0-9]+)/$', PostRequests.as_view(), name="Post Requests"),
 )

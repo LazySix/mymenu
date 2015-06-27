@@ -123,6 +123,28 @@ class TableDetail(APIView):
         serializer = TableSerializer(obj)
         return JSONResponse(serializer.data)
 
+class ProductQuantityDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = ProductQuantity.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = ProductQuantitySerializer(obj)
+        return JSONResponse(serializer.data)
+
+class OrderDetail(APIView):
+    @csrf_exempt
+    def get(self, request, pk):
+        try:
+            obj = Order.objects.get(pk=pk)
+        except:
+            return HttpResponse(status=404)
+        serializer = OrderSerializer(obj)
+        return JSONResponse(serializer.data)
+
+
+class PostRequests(APIView):
     @csrf_exempt
     def post(self, request, pk, format=None):
         try:
@@ -181,23 +203,3 @@ class TableDetail(APIView):
         except Exception as e:
             print traceback.print_exc()
             return JSONResponse({'error': True, 'reason': 'Server error'})
-
-class ProductQuantityDetail(APIView):
-    @csrf_exempt
-    def get(self, request, pk):
-        try:
-            obj = ProductQuantity.objects.get(pk=pk)
-        except:
-            return HttpResponse(status=404)
-        serializer = ProductQuantitySerializer(obj)
-        return JSONResponse(serializer.data)
-
-class OrderDetail(APIView):
-    @csrf_exempt
-    def get(self, request, pk):
-        try:
-            obj = Order.objects.get(pk=pk)
-        except:
-            return HttpResponse(status=404)
-        serializer = OrderSerializer(obj)
-        return JSONResponse(serializer.data)
